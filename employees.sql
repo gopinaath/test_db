@@ -22,9 +22,10 @@
 --  Any similarity to existing people is purely coincidental.
 -- 
 
-DROP DATABASE IF EXISTS employees;
-CREATE DATABASE IF NOT EXISTS employees;
-USE employees;
+-- DROP DATABASE IF EXISTS employees;
+-- CREATE DATABASE IF NOT EXISTS employees;
+-- USE employees;
+-- GRANT ALL ON employees to user;
 
 SELECT 'CREATING DATABASE STRUCTURE' as 'INFO';
 
@@ -43,7 +44,7 @@ CREATE TABLE employees (
     birth_date  DATE            NOT NULL,
     first_name  VARCHAR(14)     NOT NULL,
     last_name   VARCHAR(16)     NOT NULL,
-    gender      ENUM ('M','F')  NOT NULL,    
+    gender      VARCHAR(1)  NOT NULL,    
     hire_date   DATE            NOT NULL,
     PRIMARY KEY (emp_no)
 );
@@ -110,18 +111,20 @@ CREATE OR REPLACE VIEW current_dept_emp AS
 flush /*!50503 binary */ logs;
 
 SELECT 'LOADING departments' as 'INFO';
-source load_departments.dump ;
+source /dbdump/load_departments.dump ;
 SELECT 'LOADING employees' as 'INFO';
-source load_employees.dump ;
+source /dbdump/load_employees.dump ;
 SELECT 'LOADING dept_emp' as 'INFO';
-source load_dept_emp.dump ;
+source /dbdump/load_dept_emp.dump ;
 SELECT 'LOADING dept_manager' as 'INFO';
-source load_dept_manager.dump ;
+source /dbdump/load_dept_manager.dump ;
 SELECT 'LOADING titles' as 'INFO';
-source load_titles.dump ;
+source /dbdump/load_titles.dump ;
 SELECT 'LOADING salaries' as 'INFO';
-source load_salaries1.dump ;
-source load_salaries2.dump ;
-source load_salaries3.dump ;
+source /dbdump/load_salaries1.dump ;
+source /dbdump/load_salaries2.dump ;
+source /dbdump/load_salaries3.dump ;
 
-source show_elapsed.sql ;
+SELECT count(*) from  departments;
+
+source /dbdump/show_elapsed.sql ;
